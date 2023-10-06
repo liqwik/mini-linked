@@ -21,8 +21,6 @@ export const TelegramProvider = (props: TelegramProviderProps) => {
       tg.backgroundColor = '#ffffff';
       tg.headerColor = '#ffffff';
       tg.isClosingConfirmationEnabled = true;
-      // tg.BackButton.isVisible = true;
-      // tg.MainButton.isVisible = true;
 
       setTgWebApp(tg);
     }
