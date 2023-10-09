@@ -1,21 +1,12 @@
+import 'dotenv/config'
 import { Input, Markup, Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { link } from "telegraf/format";
+import { BOT_TOKEN, WEB_APP_URL } from './config.js';
 
-const TOKEN = "";
-const WEB_APP_URL = "";
+const bot = new Telegraf(BOT_TOKEN);
 
-const bot = new Telegraf(TOKEN);
-
-bot.start(async (ctx) => {
-  await ctx.setChatMenuButton({
-    text: "View Jobs",
-    type: "web_app",
-    web_app: { url: WEB_APP_URL },
-  });
-
-  await ctx.reply(
-    `🌟 Welcome to the Mini Linked! 🌟
+const welcomeMessage = `🌟 Welcome to the Mini Linked! 🌟
 
 Are you looking to take the next step in your career? You're in the right place! Our powerful job search platform is designed to connect talented individuals like you with exciting career opportunities.
 
@@ -27,7 +18,16 @@ Stay up-to-date with the latest job market trends, industry insights, and expert
 
 Remember, your dream job is just a few clicks away. Let's embark on this journey together and unlock endless career possibilities. Good luck!
 
-If you have any questions or need assistance, feel free to reach out to our support team. Happy job hunting! 🎉`,
+If you have any questions or need assistance, feel free to reach out to our support team. Happy job hunting! 🎉`;
+
+bot.start(async (ctx) => {
+  await ctx.setChatMenuButton({
+    text: "View Jobs",
+    type: "web_app",
+    web_app: { url: WEB_APP_URL },
+  });
+
+  await ctx.reply(welcomeMessage,
     Markup.inlineKeyboard([Markup.button.webApp("View Jobs", WEB_APP_URL)])
   );
 });
@@ -37,6 +37,18 @@ bot.command("quit", async (ctx) => {
   // await ctx.telegram.leaveChat(ctx.message.chat.id);
   // Using context shortcut
   // await ctx.leaveChat();
+});
+
+bot.command('restart', async (ctx) => {
+  await ctx.setChatMenuButton({
+    text: "View Jobs",
+    type: "web_app",
+    web_app: { url: WEB_APP_URL },
+  });
+
+  await ctx.reply(welcomeMessage,
+    Markup.inlineKeyboard([Markup.button.webApp("View Jobs", WEB_APP_URL)])
+  );
 });
 
 bot.use(async (ctx, next) => {
@@ -59,7 +71,7 @@ bot.command("link", (ctx) =>
   /*
     Go to @Botfather and create a new app for your bot first, using /newapp
     Then modify this link appropriately.
-	
+
     startapp is optional.
     If provided, it will be passed as start_param in initData
     and as ?tgWebAppStartParam=$command in the Web App URL
