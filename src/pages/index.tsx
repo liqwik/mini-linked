@@ -1,12 +1,15 @@
-import { FormEvent, useEffect, useState } from 'react';
-import useTelegram from '@/context/useTelegram';
+import { useRouter } from 'next/router';
 import { useJobList } from '@/context/useJobList';
 import JobCard from '@/components/jobs/JobCard';
 import JobCardSkeleton from '@/components/jobs/JobCardSkeleton';
 
 export default function Home() {
-  const { tgWebApp }: any = useTelegram();
   const { isLoading, data } = useJobList();
+  const router = useRouter();
+
+  const handleViewDetail = async (id: string) => {
+    router.push(`/detail/${id}`);
+  };
 
   return (
     <main
@@ -17,7 +20,13 @@ export default function Home() {
           [1, 2, 3, 4].map((item) => <JobCardSkeleton key={item.toString()} />)}
         {data &&
           data?.length > 0 &&
-          data.map((item, idx) => <JobCard idx={idx} job={item} />)}
+          data.map((item, idx) => (
+            <JobCard
+              idx={idx}
+              job={item}
+              onClick={() => handleViewDetail(item.id)}
+            />
+          ))}
       </div>
     </main>
   );
