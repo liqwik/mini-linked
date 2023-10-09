@@ -7,7 +7,7 @@ type TCard = {
 
 export default function Card({ children, ...props }: TCard) {
   return (
-    <div className='mb-4 rounded-md bg-white p-4' {...props}>
+    <div className='mb-4 rounded-md bg-slate-800 p-4' {...props}>
       {children}
     </div>
   );

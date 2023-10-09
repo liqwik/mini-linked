@@ -7,16 +7,19 @@ export const useJobList = () => {
   const [data, setData] = useState<JobModel[] | null>(null);
 
   useEffect(() => {
-    fetch(`${ApiUtil.search}?query=software`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.data) {
-          const jobList = data.data.map((item: any) => toJobMap(item));
+    const fetchJobs = async () => {
+      const res = await fetch(`${ApiUtil.search}?query=software`);
+      const jsonRes = await res.json();
 
-          setData(jobList);
-          setIsLoading(false);
-        }
-      });
+      if (jsonRes && jsonRes.data) {
+        const jobList = jsonRes.data.map((item: any) => toJobMap(item));
+
+        setData(jobList);
+        setIsLoading(false);
+      }
+    };
+
+    fetchJobs();
   }, []);
 
   return {

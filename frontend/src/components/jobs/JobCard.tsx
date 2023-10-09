@@ -1,13 +1,13 @@
-import Job from '@/models/job';
 import Card from '../cards/Card';
 import BrandLogo from '../avatar/BrandLogo';
 import Title from '../typography/Title';
 import Description from '../typography/Description';
 import TagList from '../TagList';
+import JobModel from '@/models/JobModel';
 
 type TJobCard = {
   idx: number;
-  job: Job;
+  job: JobModel;
   [props: string]: any;
 };
 
@@ -33,7 +33,7 @@ export default function JobCard({ idx, job, ...props }: TJobCard) {
         <div className='container'>
           <div className='flex flex-row justify-end'>
             {/* <p className='text-slate-500 text-xs'>2 hours ago</p> */}
-            <p className='text-xs text-slate-600'>
+            <p className='text-xs text-slate-300'>
               <strong>{job.salary}</strong>
             </p>
           </div>
