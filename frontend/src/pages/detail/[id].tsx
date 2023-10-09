@@ -11,9 +11,10 @@ export default function JobDetailPage() {
 
   useEffect(() => {
     TlgWebApp.BackButton.isVisible = true;
-    TlgWebApp.MainButton.isVisible = true;
-
     TlgWebApp.BackButton.onClick(handleBack);
+
+    TlgWebApp.MainButton.isVisible = true;
+    TlgWebApp.MainButton.setText('APPLY');
     TlgWebApp.MainButton.onClick(handleApply);
 
     return () => {
