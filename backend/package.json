@@ -1,0 +1,24 @@
+{
+  "name": "mini-linked-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Liqwik",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "telegraf": "^4.14.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  }
+}
