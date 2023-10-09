@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import Job from '@/models/job';
 import ApiUtil from '@/utils/api';
 import JobList from '@/_mockdata/jobs-list.json';
+import JobModel from '@/models/JobModel';
 
 export const useJobDetail = (jobId: string | string[] | undefined) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<Job | null>(null);
+  const [data, setData] = useState<JobModel | null>(null);
 
   useEffect(() => {
     const item = JobList.find((job) => job.id === jobId);
@@ -22,12 +22,6 @@ export const useJobDetail = (jobId: string | string[] | undefined) => {
       });
       setIsLoading(false);
     }
-    // fetch(`${ApiUtil.search}?query=software`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setData(data.data);
-    //     setIsLoading(false);
-    //   });
   }, [jobId]);
 
   return {
