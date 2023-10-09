@@ -6,29 +6,30 @@ import {
   useState,
 } from 'react';
 
-type TelegramProviderProps = { initialize: {} } & PropsWithChildren;
+type TelegramProviderProps = {} & PropsWithChildren;
 
 const TelegramContext = createContext({});
 
-export const TelegramProvider = (props: TelegramProviderProps) => {
-  const [tgWebApp, setTgWebApp] = useState(props.initialize);
+export const TelegramProvider = ({ children }: TelegramProviderProps) => {
+  const [webApp, setWebApp] = useState({});
 
   useEffect(() => {
-    const tg = (window as any).Telegram?.WebApp;
+    const tlg = (window as any).Telegram?.WebApp;
 
-    if (tg) {
-      tg.ready();
-      tg.backgroundColor = '#ffffff';
-      tg.headerColor = '#ffffff';
-      tg.isClosingConfirmationEnabled = true;
+    if (tlg) {
+      tlg.ready();
 
-      setTgWebApp(tg);
+      tlg.backgroundColor = '#333333';
+      tlg.headerColor = '#333333';
+      tlg.isClosingConfirmationEnabled = true;
+
+      setWebApp(tlg);
     }
   }, []);
 
   return (
-    <TelegramContext.Provider value={{ tgWebApp }}>
-      {props.children}
+    <TelegramContext.Provider value={{ TlgWebApp: webApp }}>
+      {children}
     </TelegramContext.Provider>
   );
 };
