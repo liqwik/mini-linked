@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Liqwik",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "telegraf": "^4.14.0"
+  }
+}
