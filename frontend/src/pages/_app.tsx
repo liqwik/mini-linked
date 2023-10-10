@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <TelegramProvider>
         <JobDetailProvider>
           <main
-            className={`flex min-h-screen flex-col items-center justify-between bg-slate-900 p-4 text-slate-100`}
+            className={`flex min-h-screen flex-col bg-slate-900 p-4 text-slate-100`}
           >
             <Component {...pageProps} />
           </main>

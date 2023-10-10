@@ -3,29 +3,33 @@ import { useJobList } from '@/context/useJobList';
 import JobCard from '@/components/jobs/JobCard';
 import JobCardSkeleton from '@/components/jobs/JobCardSkeleton';
 import useJobDetail from '@/context/useJobDetail';
+import { useCallback, useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
   const { isLoading, data: jobs } = useJobList();
   const { setJobDetail } = useJobDetail();
 
-  const handleViewDetail = async (id: string) => {
-    const jobDetail = jobs?.find(job => job.id === id);
+  const handleViewDetail = useCallback(
+    async (id: string) => {
+      const jobDetail = jobs?.find((job) => job.id === id);
 
-    if (!jobDetail) return;
+      if (!jobDetail) return;
 
-    setJobDetail((prev: any) => ({
-      ...prev,
-      ...jobDetail,
-      description: jobDetail.description.replace(/[\n]/g, '<br>'),
-      requirement: jobDetail.requirement.replace(/[\n]/g, '<br>'),
-    }));
+      setJobDetail((prev: any) => ({
+        ...prev,
+        ...jobDetail,
+        description: jobDetail.description.replace(/[\n]/g, '<br>'),
+        requirement: jobDetail.requirement.replace(/[\n]/g, '<br>'),
+      }));
 
-    router.push({
-      pathname: '/detail/[id]',
-      query: { id }
-    });
-  };
+      router.push({
+        pathname: '/detail/[id]',
+        query: { id },
+      });
+    },
+    [jobs, router, setJobDetail]
+  );
 
   if (isLoading) {
     return (

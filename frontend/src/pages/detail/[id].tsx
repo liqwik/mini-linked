@@ -9,13 +9,18 @@ export default function JobDetailPage() {
   const { TlgWebApp }: any = useTelegram();
   const { jobDetail } = useJobDetail();
 
+  const { id } = router.query;
+
   const handleBack = useCallback(async () => {
     router.back();
   }, [router]);
 
   const handleApply = useCallback(async () => {
-    router.push(`/apply-job/${router.query.id}`);
-  }, [router]);
+    router.push({
+      pathname: `/apply-job/[id]`,
+      query: { id },
+    });
+  }, [router, id]);
 
   useEffect(() => {
     TlgWebApp.BackButton.isVisible = true;
@@ -39,16 +44,12 @@ export default function JobDetailPage() {
   }
 
   return (
-    <div className='container bg-slate-900 p-8 text-slate-100'>
+    <div className='container'>
       <div className='flex flex-col gap-8'>
         <div className='flex flex-col items-center gap-4'>
-          <div className='container'>
-            <Image src={jobDetail.logo} width={72} height={72} alt='Logo' />
-          </div>
+          <Image src={jobDetail.logo} width={72} height={72} alt='Logo' />
 
-          <div className='container'>
-            <h1 className='text-xl'>{jobDetail.title}</h1>
-          </div>
+          <h1 className='text-xl'>{jobDetail.title}</h1>
 
           <div className=''>
             <h2 className='text-slate-400'>{jobDetail.companyName}</h2>
