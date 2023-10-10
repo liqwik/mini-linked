@@ -1,7 +1,5 @@
 import 'dotenv/config';
 import { Markup, Telegraf } from 'telegraf';
-import { message } from 'telegraf/filters';
-import { link } from 'telegraf/format';
 import { BOT_TOKEN, BOT_WELCOME_MESSAGE, WEB_APP_URL } from './config.js';
 
 const bot = new Telegraf(BOT_TOKEN);
