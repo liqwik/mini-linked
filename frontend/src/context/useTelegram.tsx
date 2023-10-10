@@ -1,3 +1,4 @@
+import { TLG_THEME } from '@/config/telegram-theme';
 import {
   PropsWithChildren,
   createContext,
@@ -19,8 +20,8 @@ export const TelegramProvider = ({ children }: TelegramProviderProps) => {
     if (tlg) {
       tlg.ready();
 
-      tlg.backgroundColor = '#333333';
-      tlg.headerColor = '#333333';
+      tlg.backgroundColor = TLG_THEME.backgroundColor;
+      tlg.headerColor = TLG_THEME.headerColor;
       tlg.isClosingConfirmationEnabled = true;
 
       setWebApp(tlg);
