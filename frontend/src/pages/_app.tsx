@@ -1,3 +1,4 @@
+import { JobDetailProvider } from '@/context/useJobDetail';
 import { TelegramProvider } from '@/context/useTelegram';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
@@ -13,11 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <TelegramProvider>
-        <main
-          className={`flex min-h-screen flex-col items-center justify-between bg-slate-900 p-4 text-slate-100`}
-        >
-          <Component {...pageProps} />
-        </main>
+        <JobDetailProvider>
+          <main
+            className={`flex min-h-screen flex-col items-center justify-between bg-slate-900 p-4 text-slate-100`}
+          >
+            <Component {...pageProps} />
+          </main>
+        </JobDetailProvider>
       </TelegramProvider>
     </>
   );

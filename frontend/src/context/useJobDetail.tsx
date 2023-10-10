@@ -1,35 +1,24 @@
-import { useEffect, useState } from 'react';
-import ApiUtil from '@/utils/api';
-import JobList from '@/_mockdata/jobs-list.json';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import JobModel from '@/models/JobModel';
 
 type JobDetail = JobModel & { requirement: string };
 
-export const useJobDetail = (jobId: string | string[] | undefined) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [data, setData] = useState<JobDetail | null>(null);
+const JobDetailContext = createContext<any>(null);
 
-  useEffect(() => {
-    const item = JobList.find((job) => job.id === jobId);
+export const JobDetailProvider = ({ children }: PropsWithChildren) => {
+  const [jobDetail, setJobDetail] = useState<any>();
 
-    if (item) {
-      setData({
-        id: item.id,
-        title: item.title,
-        companyName: item.employer_name,
-        logo: item.employer_logo!,
-        salary: item.salary,
-        tags: [item.term],
-        description: item.description.replace(/[\n]/g, '<br>'),
-        requirement: item.requirement.replace(/[\n]/g, '<br>'),
-      });
+  return <JobDetailContext.Provider value={{ jobDetail, setJobDetail }}>{children}</JobDetailContext.Provider>
+}
 
-      setIsLoading(false);
-    }
-  }, [jobId]);
+const useJobDetail = () => {
+  const context = useContext(JobDetailContext);
 
-  return {
-    data,
-    isLoading,
-  };
+  if (!context) {
+    throw new Error('Please use JobDetailContext in parent component');
+  }
+
+  return context;
 };
+
+export default useJobDetail;
