@@ -2,13 +2,29 @@ import { useRouter } from 'next/router';
 import { useJobList } from '@/context/useJobList';
 import JobCard from '@/components/jobs/JobCard';
 import JobCardSkeleton from '@/components/jobs/JobCardSkeleton';
+import useJobDetail from '@/context/useJobDetail';
 
 export default function Home() {
-  const { isLoading, data: jobs } = useJobList();
   const router = useRouter();
+  const { isLoading, data: jobs } = useJobList();
+  const { setJobDetail } = useJobDetail();
 
   const handleViewDetail = async (id: string) => {
-    router.push(`/detail/${id}`);
+    const jobDetail = jobs?.find(job => job.id === id);
+
+    if (!jobDetail) return;
+
+    setJobDetail((prev: any) => ({
+      ...prev,
+      ...jobDetail,
+      description: jobDetail.description.replace(/[\n]/g, '<br>'),
+      requirement: jobDetail.requirement.replace(/[\n]/g, '<br>'),
+    }));
+
+    router.push({
+      pathname: '/detail/[id]',
+      query: { id }
+    });
   };
 
   if (isLoading) {
@@ -27,6 +43,7 @@ export default function Home() {
         jobs?.length > 0 &&
         jobs.map((job, idx) => (
           <JobCard
+            key={job.id}
             idx={idx}
             job={job}
             onClick={() => handleViewDetail(job.id)}

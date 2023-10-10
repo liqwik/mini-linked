@@ -1,6 +1,6 @@
 export default function JobCardSkeleton() {
   return (
-    <div className='mx-auto mb-4 w-full max-w-sm rounded-md bg-white p-4'>
+    <div className='mx-auto mb-4 w-full max-w-sm rounded-md bg-slate-800 p-4'>
       <div className='flex animate-pulse space-x-4'>
         <div className='h-10 w-10 rounded-full bg-slate-200'></div>
         <div className='flex-1 space-y-6 py-1'>
