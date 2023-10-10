@@ -31,7 +31,7 @@ export default function JobDetailPage() {
   };
 
   const handleApply = async () => {
-    alert('apply');
+    router.push(`/apply-job/${router.query.id}`);
   };
 
   if (!job) {

@@ -22,20 +22,16 @@ export default function Home() {
   }
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between bg-slate-900 p-4 text-slate-100`}
-    >
-      <div className='container'>
-        {jobs &&
-          jobs?.length > 0 &&
-          jobs.map((job, idx) => (
-            <JobCard
-              idx={idx}
-              job={job}
-              onClick={() => handleViewDetail(job.id)}
-            />
-          ))}
-      </div>
-    </main>
+    <div className='container'>
+      {jobs &&
+        jobs?.length > 0 &&
+        jobs.map((job, idx) => (
+          <JobCard
+            idx={idx}
+            job={job}
+            onClick={() => handleViewDetail(job.id)}
+          />
+        ))}
+    </div>
   );
 }

@@ -1,11 +1,24 @@
 import { TelegramProvider } from '@/context/useTelegram';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <TelegramProvider>
-      <Component {...pageProps} />
-    </TelegramProvider>
+    <>
+      <Head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+        />
+      </Head>
+      <TelegramProvider>
+        <main
+          className={`flex min-h-screen flex-col items-center justify-between bg-slate-900 p-4 text-slate-100`}
+        >
+          <Component {...pageProps} />
+        </main>
+      </TelegramProvider>
+    </>
   );
 }
